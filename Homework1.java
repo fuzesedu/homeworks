@@ -17,18 +17,28 @@ interface Mergesort {
 public class Homework1 implements Mergesort {
 
 	public static void main(String[] args) {
-		int[] array = { 2, 8, 5, 3, 7, 1, 6, 4 };
+		int[] array = { 2, 8, 5, 3, 7, 6, 4 };
 		Mergesort mRes = new Homework1();
-		int[] res = mRes.mergesort(array);
+		int[] res = mRes.getFirstHalfOf(array);
 		print(res);
 	}
 
 	@Override
 	public int[] getFirstHalfOf(int[] array) {
+		int length = Math.round(array.length / 2);// find the middle
 		int[] res = new int[Math.round(array.length / 2)];
 		if (array.length > 1) {
-			for (int i = 0; i < res.length; i++) {
-				res[i] = array[i];
+			if (array.length % 2 != 0) {
+				length = Math.round(array.length / 2 + 1);
+				res = new int[length];
+				length--;
+				for (int i = 0; i < length + 1; i++) {
+					res[i] = array[i];
+				}
+			} else {
+				for (int i = 0; i < length; i++) {
+					res[i] = array[i]; // copy array into the res;
+				}
 			}
 		} else {
 			res = array;
@@ -42,18 +52,8 @@ public class Homework1 implements Mergesort {
 		int length = Math.round(array.length / 2);// find the middle
 		int[] res = new int[length];
 		if (length > 1) {
-			if (array.length % 2 != 0) {
-				length = Math.round(array.length / 2 + 1);
-				res = new int[length];
-				length--;
-				System.out.println("delitelne");
-				for (int i = 0; i < length + 1; i++) {
-					res[i] = array[length + i];
-				}
-			} else {
-				for (int i = 0; i < length; i++) {
-					res[i] = array[length + i]; // copy array into the res;
-				}
+			for (int i = 0; i < res.length; i++) {
+				res[i] = array[i+length];
 			}
 		} else {
 			res = array;
